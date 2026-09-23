@@ -3,831 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Статус ремонта · ГрандМедТех</title><!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Статус ремонта · ГрандМедТех</title>
+    
+    <!-- ИКОНКА ВО ВКЛАДКЕ БРАУЗЕРА -->
+    <link rel="icon" href="https://mironov62-svg.github.io/SID_DSH/assets/favicon.png" type="image/png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700%7CPoppins:400,500,600,700&display=swap" rel="stylesheet">
+    
     <style>
         /* =========================================================
-           Дизайн-токены
+           Стили (Компактная версия)
            ========================================================= */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --wd-primary: #595ee0;
-            --gold-title: #f2d399;
             --phone: #ffad00;
             --violet: #9e43fa;
             --violet-2: #a044ff;
-            --violet-deep: #6a3093;
             --success: #459647;
-            --success-light: #57b95a;
-
             --bg: #101010;
-            --bg-deep: #000000;
             --bg-panel: rgba(0, 0, 0, 0.45);
             --bg-panel-2: #17151c;
             --text: #ffffff;
             --text-soft: rgba(255, 255, 255, 0.78);
             --text-muted: rgba(255, 255, 255, 0.55);
-            --text-dim: rgba(255, 255, 255, 0.4);
             --border: rgba(255, 255, 255, 0.12);
-            --border-strong: rgba(255, 255, 255, 0.2);
-
-            --radius-sm: 5px;
+            --radius-xl: 15px;
             --radius-md: 8px;
             --radius-lg: 10px;
-            --radius-xl: 15px;
-
+            
             --grad-header: linear-gradient(272deg, rgb(84, 99, 130) 0%, rgb(92, 66, 131) 98%);
             --grad-btn: linear-gradient(to right, #6a3093 0%, #a044ff 51%, #6a3093 100%);
-            --grad-panel: linear-gradient(87deg, rgba(155, 63, 212, 1) 0%, rgba(118, 54, 223, 1) 98%);
             --grad-stepper: linear-gradient(135deg, #6a3093 0%, #a044ff 100%);
-
-            --glow-violet: 0 0 10px rgba(163, 70, 244, 0.35);
-            --box-glow: rgb(119 54 222) -1px 11px 35px -20px, rgb(152 62 212) 1px 1px 20px -30px, rgb(119 54 223) 0 1px 20px 0 inset;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            --box-glow: rgb(119 54 222) -1px 11px 35px -20px, rgb(152 62 212) 1px 1px 20px -30px;
+            --transition: all 0.3s ease;
         }
 
         body {
-            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+            font-family: 'Montserrat', Arial, sans-serif;
             font-size: 14px;
-            font-weight: 400;
             background-color: var(--bg);
-            background-image:
-                radial-gradient(circle at 12% 0%, rgba(106, 48, 147, 0.45) 0%, rgba(106, 48, 147, 0) 45%),
-                radial-gradient(circle at 88% 12%, rgba(89, 94, 224, 0.28) 0%, rgba(89, 94, 224, 0) 42%),
-                radial-gradient(circle at 50% 115%, rgba(50, 39, 61, 0.85) 0%, rgba(16, 16, 16, 0) 65%);
+            background-image: radial-gradient(circle at 50% 0%, rgba(106, 48, 147, 0.4) 0%, transparent 60%);
             background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             color: var(--text);
-            -webkit-font-smoothing: antialiased;
         }
 
-        /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
         .page {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px 20px 40px;
+            padding: 15px 20px;
             width: 100%;
             display: flex;
             justify-content: center;
         }
 
         .container {
-            position: relative;
             width: 100%;
-            max-width: 900px; /* Единая ширина для шапки и контента */
+            max-width: 900px;
             background: var(--bg-panel);
             border: 1px solid var(--border);
             border-radius: var(--radius-xl);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            box-shadow: var(--box-glow), 0 30px 60px -30px rgba(0, 0, 0, 0.9);
-            overflow: visible; /* ВАЖНО: Разрешаем выход тултипам за границы */
+            backdrop-filter: blur(10px);
+            box-shadow: var(--box-glow);
+            overflow: visible; /* Разрешаем выход тултипам */
         }
 
-        /* ===== ШАПКА ВНУТРИ КОНТЕЙНЕРА ===== */
+        /* ШАПКА */
         .site-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
-            padding: 14px 26px;
+            gap: 15px;
+            padding: 10px 24px;
             background: var(--grad-header);
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            border-radius: var(--radius-xl) var(--radius-xl) 0 0; /* Скругление только сверху */
-            box-shadow: 0 0 10px rgba(163, 70, 244, 0.35);
-            color: #fff;
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
         }
 
         .site-logo {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             text-decoration: none;
             color: #fff;
-            min-width: 0;
         }
 
         .site-logo img {
-            height: 46px;
+            height: 40px;
             width: auto;
             display: block;
         }
 
-        .site-logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.25;
-            min-width: 0;
-        }
-
         .site-logo-text b {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            letter-spacing: 0.4px;
             text-transform: uppercase;
-            white-space: nowrap;
+            display: block;
+            line-height: 1.1;
         }
 
         .site-logo-text span {
-            font-size: 11.5px;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.75);
+            font-size: 10px;
+            opacity: 0.8;
         }
 
-        .site-contacts {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 2px;
-            text-align: right;
-        }
-
+        .site-contacts { text-align: right; }
         .site-contacts a {
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 1.3;
-            white-space: nowrap;
-        }
-
-        .site-phone { color: var(--phone); }
-        .site-mail { color: #ffffff; font-size: 15px !important; }
-        .site-contacts a:hover { text-decoration: underline; }
-
-        /* ===== ЗАГОЛОВОК БЛОКА ===== */
-        .header {
-            padding: 20px 30px 16px; /* Уменьшен отступ */
-            text-align: center;
-            background: linear-gradient(180deg, rgba(155, 63, 212, 0.16) 0%, rgba(0, 0, 0, 0) 100%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .header .card-title {
-            font-size: 24px; /* Чуть меньше */
-            font-weight: 600;
-            line-height: 1.3;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .header .card-title::after {
-            content: '';
             display: block;
-            width: 60px;
-            height: 3px;
-            margin: 10px auto 0;
-            border-radius: 3px;
-            background: var(--grad-panel);
+            text-decoration: none;
+            color: #fff;
+            line-height: 1.2;
+        }
+        .site-phone { color: var(--phone); font-weight: 600; font-size: 16px; }
+        .site-mail { font-size: 13px; opacity: 0.9; }
+
+        /* ЗАГОЛОВОК (Ужат на 30%) */
+        .header-block {
+            padding: 10px 20px 8px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .header p {
-            font-size: 13px;
-            line-height: 1.5;
+        .header-block h2 {
+            font-size: 19px;
+            margin-bottom: 2px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .header-block p {
+            font-size: 11.5px;
             color: var(--text-soft);
-            max-width: 520px;
+            line-height: 1.3;
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        .content { padding: 20px 30px 24px; } /* Уменьшен отступ */
+        .content { padding: 15px 24px 20px; }
 
-        /* ===== СЕКЦИИ ПОИСКА ===== */
+        /* ПОЛЯ ПОИСКА */
         .search-section {
-            margin-bottom: 16px; /* Меньше отступ между блоками */
-            padding: 18px 20px; /* Компактнее внутренние отступы */
-            background: rgba(0, 0, 0, 0.35);
+            margin-bottom: 12px;
+            padding: 12px 18px;
+            background: rgba(0,0,0,0.3);
             border: 1px solid var(--border);
             border-radius: var(--radius-xl);
-            transition: var(--transition);
-        }
-
-        .search-section:hover {
-            border-color: rgba(158, 67, 250, 0.55);
-            box-shadow: var(--glow-violet);
         }
 
         .search-section h3 {
-            position: relative;
-            font-family: 'Poppins', Arial, sans-serif;
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 0.6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
             text-transform: uppercase;
+            margin-bottom: 8px;
+            color: #fff;
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding-bottom: 10px;
-            margin-bottom: 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            gap: 8px;
+            letter-spacing: 0.5px;
         }
-
-        .search-section h3::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -1px;
-            width: 70px;
-            height: 2px;
-            background: var(--grad-panel);
-        }
-
-        .search-section h3 svg {
-            width: 18px;
-            height: 18px;
-            stroke: #c39bf5;
-            fill: none;
-            stroke-width: 1.8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            flex-shrink: 0;
-        }
-
+        
         .input-group { margin-bottom: 6px; }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 12.5px;
-            font-weight: 500;
-            color: var(--text-soft);
-        }
-
+        
         .input-group input {
             width: 100%;
-            padding: 12px 16px; /* Уменьшена высота поля */
-            background: #ffffff;
-            border: 1px solid rgba(158, 67, 250, 0.35);
+            padding: 9px 12px;
+            background: #fff;
+            border: 1px solid rgba(158, 67, 250, 0.3);
             border-radius: var(--radius-md);
-            font-family: inherit;
-            font-size: 15px;
-            font-weight: 400;
-            color: #333333;
-            box-shadow: 0 6px 11px 0 rgba(116, 117, 126, 0.28);
+            font-size: 14px;
+            color: #333;
             transition: var(--transition);
         }
-
-        .input-group input::placeholder { color: #9a9aa5; }
-
+        
         .input-group input:focus {
             outline: none;
             border-color: var(--violet);
-            box-shadow: 0 0 0 4px rgba(158, 67, 250, 0.18), 0 6px 14px 0 rgba(116, 117, 126, 0.3);
+            box-shadow: 0 0 0 2px rgba(158, 67, 250, 0.2);
         }
 
-        .input-hint {
-            display: flex;
-            align-items: flex-start;
-            gap: 7px;
-            margin: 8px 0 12px;
-            font-size: 11.5px;
-            line-height: 1.45;
-            color: var(--text-muted);
-        }
-
-        .input-hint svg {
-            width: 14px;
-            height: 14px;
-            margin-top: 1px;
-            flex-shrink: 0;
-            stroke: #c39bf5;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        /* ===== КНОПКИ ===== */
-        .button-group { display: flex; gap: 12px; }
+        .button-group { display: flex; gap: 10px; margin-top: 8px; }
 
         button {
             flex: 1;
-            padding: 12px 20px; /* Компактнее кнопки */
-            border: 1px solid transparent;
+            padding: 9px;
+            border: none;
             border-radius: var(--radius-lg);
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-position 0.5s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        button:focus-visible {
-            outline: 2px solid var(--violet-2);
-            outline-offset: 3px;
+            text-transform: uppercase;
+            font-size: 11px;
+            transition: var(--transition);
         }
 
         .btn-primary {
-            background-image: var(--grad-btn);
-            background-size: 200% auto;
-            background-position: left center;
-            color: #ffffff;
-            box-shadow: 0 0 10px rgba(238, 238, 238, 0.18), 0 10px 26px -12px rgba(160, 68, 255, 0.9);
+            background: var(--grad-btn);
+            background-size: 200%;
+            color: white;
+            box-shadow: 0 4px 15px rgba(160, 68, 255, 0.3);
         }
-
-        .btn-primary:hover:not(:disabled) {
-            background-position: right center;
-            box-shadow: 0 0 14px rgba(163, 70, 244, 0.45), 0 12px 30px -12px rgba(160, 68, 255, 1);
-        }
+        .btn-primary:hover { background-position: right; }
 
         .btn-secondary {
             background: transparent;
-            color: #ffffff;
-            border-color: var(--border-strong);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
         }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
 
-        .btn-secondary:hover:not(:disabled) {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        button:disabled {
-            opacity: 0.55;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        /* ===== РЕЗУЛЬТАТЫ ===== */
+        /* РЕЗУЛЬТАТЫ */
         .results-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 20px 0 14px;
-            padding-bottom: 10px;
-            font-family: 'Poppins', Arial, sans-serif;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: 0.6px;
+            margin: 15px 0 8px;
+            color: var(--text-soft);
             text-transform: uppercase;
-            color: #ffffff;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            letter-spacing: 0.5px;
         }
-
-        .results-header::before {
-            content: '';
-            width: 4px;
-            height: 18px;
-            border-radius: 2px;
-            background: var(--grad-panel);
-        }
-
-        #results-container { min-height: 50px; }
 
         .result-item {
-            margin-bottom: 20px;
-            padding: 18px;
             background: var(--bg-panel-2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
             border-radius: var(--radius-xl);
-            box-shadow: var(--box-glow);
-            animation: fadeSlideIn 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
-            transition: var(--transition);
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            animation: fadeIn 0.4s ease;
         }
 
-        @keyframes fadeSlideIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-item:hover {
-            border-color: rgba(158, 67, 250, 0.6);
-            box-shadow: var(--box-glow), var(--glow-violet);
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .result-field {
             display: flex;
-            margin-bottom: 4px;
-            padding: 2px 0;
-            font-size: 13.5px;
-            line-height: 1.5;
-        }
-
-        .field-label {
-            min-width: 150px;
-            flex-shrink: 0;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        .field-value {
-            flex: 1;
-            color: var(--text-soft);
-            font-weight: 400;
-        }
-
-        .field-value.stage-highlight {
-            display: inline-block;
-            padding: 2px 10px;
-            border: 1px solid rgba(158, 67, 250, 0.5);
-            border-radius: var(--radius-sm);
-            background: rgba(158, 67, 250, 0.18);
-            color: #d9b3ff;
-            font-weight: 600;
-        }
-
-        .field-value.stage-highlight.final-stage {
-            border-color: rgba(69, 150, 71, 0.6);
-            background: rgba(69, 150, 71, 0.22);
-            color: #8fe093;
-        }
-
-        .no-data {
-            padding: 30px 20px;
-            text-align: center;
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        /* ===== СКЕЛЕТОН ===== */
-        .skeleton-card {
-            margin-bottom: 20px;
-            padding: 18px;
-            background: var(--bg-panel-2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-xl);
-        }
-
-        .skeleton-line {
-            height: 12px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(163,70,244,0.22) 50%, rgba(255,255,255,0.04) 100%);
-            background-size: 200% 100%;
-            animation: shimmer 1.4s ease-in-out infinite;
-        }
-
-        .skeleton-line.w-40 { width: 40%; }
-        .skeleton-line.w-60 { width: 60%; }
-        .skeleton-line.w-80 { width: 80%; }
-        .skeleton-line.w-30 { width: 30%; }
-
-        .skeleton-stepper {
-            height: 50px;
-            margin-top: 14px;
-            border-radius: var(--radius-lg);
-            background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(163,70,244,0.18) 50%, rgba(255,255,255,0.03) 100%);
-            background-size: 200% 100%;
-            animation: shimmer 1.4s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%   { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* ===== ШКАЛА ПРОГРЕССА ===== */
-        .progress-wrapper {
-            margin-top: 16px;
-            padding: 0 0 12px;
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-xl);
-            overflow: visible; /* Разрешаем выход тултипам */
-        }
-
-        .progress-title {
-            margin-bottom: 16px;
-            padding: 10px 20px;
-            text-align: center;
-            font-family: 'Poppins', Arial, sans-serif;
+            margin-bottom: 3px;
             font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            color: #ffffff;
-            background-image: var(--grad-panel);
-            box-shadow: 0 0 10px rgba(238, 238, 238, 0.12);
         }
+        .field-label { width: 120px; color: var(--text-muted); font-weight: 500; flex-shrink: 0; }
+        .field-value { flex: 1; color: var(--text-soft); }
 
+        /* STEPPER */
         .stepper {
-            position: relative;
             display: flex;
             justify-content: space-between;
-            max-width: 720px;
-            margin: 20px auto 0;
-            padding: 0 12px;
-        }
-
-        .stepper::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            border-radius: 2px;
-            background: rgba(255, 255, 255, 0.12);
-            z-index: 0;
-        }
-
-        .step {
+            margin: 15px 0 5px;
             position: relative;
-            z-index: 1;
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            outline: none;
         }
-
-        .step-circle {
+        
+        .step {
             position: relative;
             z-index: 2;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            margin-bottom: 6px;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            background: #201d26;
-            color: var(--text-muted);
-            font-size: 11px;
-            font-weight: 700;
-            transition: var(--transition);
+            cursor: pointer;
+            flex: 1;
         }
 
-        .step-human-label {
-            max-width: 80px;
-            font-size: 10px;
-            font-weight: 500;
-            line-height: 1.2;
-            text-align: center;
-            color: var(--text-muted);
-            white-space: normal;
+        .step-circle {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #222;
+            border: 2px solid #444;
+            color: #777;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: bold;
+            margin-bottom: 4px;
             transition: var(--transition);
         }
 
         .step.active .step-circle {
-            background-image: var(--grad-stepper);
+            background: var(--grad-stepper);
             border-color: var(--violet-2);
-            color: #ffffff;
-            box-shadow: 0 0 0 4px rgba(158, 67, 250, 0.18), 0 0 18px rgba(163, 70, 244, 0.5);
+            color: white;
+            box-shadow: 0 0 8px rgba(160, 68, 255, 0.5);
         }
 
-        .step.current .step-circle { animation: pulseViolet 1.8s ease-in-out infinite; }
-        .step.final-step.current .step-circle { animation: pulseGreen 1.8s ease-in-out infinite; }
-
-        @keyframes pulseViolet {
-            0%, 100% { box-shadow: 0 0 0 4px rgba(158, 67, 250, 0.18), 0 0 18px rgba(163, 70, 244, 0.5); transform: scale(1); }
-            50% { box-shadow: 0 0 0 8px rgba(158, 67, 250, 0.1), 0 0 28px rgba(163, 70, 244, 0.55); transform: scale(1.08); }
+        .step-label {
+            font-size: 8px;
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 55px;
+            line-height: 1.1;
         }
+        
+        .step.active .step-label { color: #d9b3ff; font-weight: 600; }
 
-        @keyframes pulseGreen {
-            0%, 100% { box-shadow: 0 0 0 4px rgba(69, 150, 71, 0.22), 0 0 18px rgba(69, 150, 71, 0.5); transform: scale(1); }
-            50% { box-shadow: 0 0 0 8px rgba(69, 150, 71, 0.12), 0 0 30px rgba(69, 150, 71, 0.55); transform: scale(1.1); }
-        }
-
-        .step.active .step-human-label { color: #d9b3ff; font-weight: 600; }
-
-        .step.final-step .step-circle {
-            background-image: linear-gradient(135deg, #459647 0%, #57b95a 100%) !important;
-            border-color: var(--success-light) !important;
-            color: #ffffff !important;
-            box-shadow: 0 0 0 4px rgba(69, 150, 71, 0.22), 0 0 18px rgba(69, 150, 71, 0.5) !important;
-        }
-
-        .step.final-step .step-human-label { color: #8fe093 !important; font-weight: 700 !important; }
-
-        .step:last-child::after { display: none !important; }
-        .step:not(.active)::after { display: none; }
-
-        .step.active::after {
+        /* ЛИНИЯ ПРОГРЕССА */
+        .stepper::before {
             content: '';
             position: absolute;
-            top: 15px;
-            left: 50%;
-            width: 100%;
+            top: 11px;
+            left: 0; right: 0;
             height: 2px;
-            border-radius: 2px;
-            background-image: var(--grad-stepper);
+            background: #333;
             z-index: 1;
         }
 
-        .step.final-step.active::after { background-image: linear-gradient(90deg, #459647, #57b95a) !important; }
-        .step.active.no-line-after::after { display: none; }
-
-        /* ===== ПОДСКАЗКА ПОД АКТИВНОЙ ТОЧКОЙ ===== */
-        .step-current-hint {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin: 16px 20px 0;
-            padding: 10px 14px;
-            background: rgba(158, 67, 250, 0.12);
-            border: 1px solid rgba(158, 67, 250, 0.3);
-            border-left: 3px solid var(--violet);
-            border-radius: var(--radius-md);
-            font-size: 12px;
-            line-height: 1.5;
-            color: var(--text-soft);
-        }
-
-        .step-current-hint.final {
-            background: rgba(69, 150, 71, 0.14);
-            border-color: rgba(69, 150, 71, 0.35);
-            border-left-color: var(--success);
-        }
-
-        .step-current-hint svg {
-            width: 14px;
-            height: 14px;
-            margin-top: 1px;
-            flex-shrink: 0;
-            stroke: #c39bf5;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .step-current-hint.final svg { stroke: #8fe093; }
-
-        /* ===== ВСПЛЫВАЮЩИЕ ОКНА (TOOLTIPS) - ИСПРАВЛЕНО ===== */
+        /* ТУЛТИПЫ (Поверх всего) */
         .step-tooltip {
             visibility: hidden;
             opacity: 0;
             position: absolute;
-            bottom: calc(100% + 10px); /* Поднимаем выше */
-            left: 50%;
-            transform: translateX(-50%) translateY(4px);
-            z-index: 9999; /* Очень высокий z-index, чтобы быть поверх всего */
-            width: 260px; /* Немного шире */
-            padding: 12px 14px;
-            background: #14121a;
-            border: 1px solid rgba(158, 67, 250, 0.45);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), var(--glow-violet);
-            color: #e8e3f2;
-            font-size: 12px;
-            font-weight: 400;
-            line-height: 1.5;
-            text-align: center;
-            white-space: normal;
-            pointer-events: none;
-            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-        }
-
-        .step-tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
+            bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
-            border: 6px solid transparent;
-            border-top-color: #14121a;
+            width: 180px;
+            padding: 8px 10px;
+            background: #1a1a1a;
+            border: 1px solid var(--violet);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 10px;
+            text-align: center;
+            z-index: 9999;
+            pointer-events: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+            margin-bottom: 8px;
         }
 
-        .step:hover .step-tooltip,
-        .step:focus-visible .step-tooltip {
+        .step:hover .step-tooltip {
             visibility: visible;
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
         }
 
-        /* ===== ЗАГРУЗКА ===== */
-        .loading { opacity: 0.75; pointer-events: none; }
-
-        .spinner {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            margin-left: 8px;
-            vertical-align: middle;
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            border-top-color: #ffffff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* ===== ПОДВАЛ ===== */
-        .footer {
-            margin-top: auto;
-            padding: 24px 20px 20px;
-            background-color: var(--bg-deep);
-            background-image: radial-gradient(ellipse at 50% 130%, rgba(106, 48, 147, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 -1px 20px rgba(163, 70, 244, 0.18);
-            text-align: center;
-            font-size: 12px;
-            line-height: 1.6;
-            color: var(--text-muted);
-        }
-
-        .footer-inner {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .footer strong {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 6px;
-        }
-
-        .footer a { color: var(--phone); text-decoration: none; }
-        .footer a:hover { text-decoration: underline; }
-
-        .footer .footer-oferta {
-            margin-top: 10px;
-            font-size: 11px;
-            color: var(--text-dim);
-        }
-
-        /* ===== АДАПТИВ ===== */
-        @media (max-width: 768px) {
-            .page { padding: 10px 10px 30px; }
-            
-            .site-header { 
-                padding: 12px 16px; 
-                flex-direction: column; 
-                align-items: center; 
-                text-align: center;
-            }
-            
-            .site-contacts { align-items: center; margin-top: 8px; }
-            .site-logo img { height: 36px; }
-            .site-logo-text b { font-size: 14px; }
-            .site-logo-text span { display: none; }
-            .site-contacts a { font-size: 15px; }
-
-            .header { padding: 16px 16px 12px; }
-            .header .card-title { font-size: 20px; }
-            
-            .content { padding: 16px; }
-            .search-section { padding: 16px; }
-            .button-group { flex-direction: column; }
-
-            .stepper {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-                padding: 0;
-            }
-
+        /* АДАПТИВ */
+        @media (max-width: 600px) {
+            .site-header { flex-direction: column; text-align: center; padding: 10px; }
+            .site-contacts { text-align: center; margin-top: 8px; }
+            .stepper { flex-wrap: wrap; gap: 8px; }
             .stepper::before { display: none; }
-
-            .step {
-                flex: 0 0 44%;
-                flex-direction: row;
-                align-items: center;
-                gap: 8px;
-                margin-bottom: 8px;
-            }
-
-            .step-circle {
-                width: 26px;
-                height: 26px;
-                margin-bottom: 0;
-                font-size: 10px;
-                flex-shrink: 0;
-            }
-
-            .step-human-label { max-width: none; text-align: left; font-size: 11px; }
-            .step.active::after { display: none !important; }
-
-            .field-label { min-width: 100px; font-size: 12px; }
-            .field-value { font-size: 13px; }
-
-            .step-tooltip {
-                left: 0;
-                width: 200px;
-                font-size: 11px;
-                transform: translateX(0) translateY(4px);
-            }
-
-            .step-tooltip::after { left: 20px; transform: translateX(0); }
-            .step:hover .step-tooltip, .step:focus-visible .step-tooltip { transform: translateX(0) translateY(0); }
-        }
-
-        @media (max-width: 480px) {
-            .result-field { flex-direction: column; gap: 2px; }
-            .field-label { min-width: auto; font-size: 11px; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.001ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.001ms !important;
-            }
+            .step { flex: 0 0 45%; flex-direction: row; gap: 8px; margin-bottom: 4px; }
+            .step-circle { margin-bottom: 0; width: 20px; height: 20px; font-size: 8px; }
+            .step-label { font-size: 9px; text-align: left; max-width: none; }
         }
     </style>
 </head>
@@ -835,15 +350,15 @@
 
     <div class="page">
         <div class="container">
-            <!-- Шапка теперь внутри контейнера -->
+            <!-- ШАПКА -->
             <header class="site-header">
-                <a class="site-logo" href="https://grandmedtech.ru/" target="_blank" rel="noopener">
-                    <!-- Используем короткий SVG вместо длинного Base64 -->
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjUiPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQwIiAvPjxwYXRoIGQ9Ik0zMCA1MEw1MCAzMEw3MCA1MEw1MCA3MFoiIGZpbGw9IndoaXRlIiAvPjwvc3ZnPg==" alt="ГрандМедТех" style="background: #595ee0; border-radius: 50%; padding: 2px;">
-                    <span class="site-logo-text">
+                <a class="site-logo" href="https://grandmedtech.ru/" target="_blank">
+                    <!-- Логотип с GitHub -->
+                    <img src="https://mironov62-svg.github.io/SID_DSH/assets/logo.png" alt="ГрандМедТех">
+                    <div class="site-logo-text">
                         <b>ГрандМедТех</b>
-                        <span>Ремонт и тех. обслуживание медтехники</span>
-                    </span>
+                        <span>Сервис медтехники</span>
+                    </div>
                 </a>
                 <div class="site-contacts">
                     <a class="site-phone" href="tel:+73833110232">8 (383) 311-02-32</a>
@@ -851,2026 +366,151 @@
                 </div>
             </header>
 
-            <div class="header">
-                <h2 class="card-title">Проверка статуса ремонта</h2>
-                <p>Введите номер квитанции или ID учреждения — мы покажем текущую стадию работ
-                    по вашему оборудованию.</p>
+            <!-- ЗАГОЛОВОК -->
+            <div class="header-block">
+                <h2>Проверка статуса ремонта</h2>
+                <p>Введите номер квитанции или ID учреждения — мы покажем текущую стадию работ.</p>
             </div>
 
             <div class="content">
+                <!-- ПОИСК ПО КВИТАНЦИИ -->
                 <div class="search-section">
-                    <h3>
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <circle cx="11" cy="11" r="7"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                        Поиск по № квитанции
-                    </h3>
+                    <h3>🔍 Поиск по № квитанции</h3>
                     <div class="input-group">
-                        <label for="receipt-id">Введите № квитанции</label>
-                        <input type="text" id="receipt-id" placeholder="Например: 41036"
-                               aria-label="Номер квитанции" autocomplete="off">
-                    </div>
-                    <div class="input-hint">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="16" x2="12" y2="12"></line>
-                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                        </svg>
-                        <span>Номер указан в квитанции, которую вы получили при сдаче оборудования.</span>
+                        <input type="text" id="receipt-id" placeholder="Например: 41036" autocomplete="off">
                     </div>
                     <div class="button-group">
-                        <button class="btn-primary" id="btnCheckReceipt" onclick="checkByReceipt()"
-                                aria-label="Проверить статус по номеру квитанции">Проверить</button>
-                        <button class="btn-secondary" onclick="clearForm()"
-                                aria-label="Очистить форму поиска">Очистить</button>
+                        <button class="btn-primary" onclick="checkByReceipt()">Проверить</button>
+                        <button class="btn-secondary" onclick="clearForm()">Очистить</button>
                     </div>
                 </div>
 
+                <!-- ПОИСК ПО ID -->
                 <div class="search-section">
-                    <h3>
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M3 21h18"></path>
-                            <path d="M5 21V7l8-4v18"></path>
-                            <path d="M19 21V11l-6-4"></path>
-                        </svg>
-                        Поиск по ID учреждения
-                    </h3>
+                    <h3>🏢 Поиск по ID учреждения</h3>
                     <div class="input-group">
-                        <label for="institution-id">Введите ID учреждения</label>
-                        <input type="text" id="institution-id" placeholder="Например: 12345"
-                               aria-label="ID учреждения" autocomplete="off">
-                    </div>
-                    <div class="input-hint">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="16" x2="12" y2="12"></line>
-                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                        </svg>
-                        <span>ID учреждения — внутренний номер, присвоенный вашей организации в нашей системе.</span>
+                        <input type="text" id="institution-id" placeholder="Например: 12345" autocomplete="off">
                     </div>
                     <div class="button-group">
-                        <button class="btn-primary" id="btnCheckInstitution" onclick="checkByInstitution()"
-                                aria-label="Проверить статус по ID учреждения">Проверить</button>
-                        <button class="btn-secondary" onclick="clearForm()"
-                                aria-label="Очистить форму поиска">Очистить</button>
+                        <button class="btn-primary" onclick="checkByInstitution()">Проверить</button>
+                        <button class="btn-secondary" onclick="clearForm()">Очистить</button>
                     </div>
                 </div>
 
-                <div class="results-header">Результаты поиска</div>
-                <div id="results-container" aria-live="polite">
-                    <div class="no-data">Введите данные и нажмите «Проверить»</div>
+                <div class="results-header">Результаты:</div>
+                <div id="results-container">
+                    <div style="padding: 15px; text-align: center; color: #666; font-size: 12px;">
+                        Введите данные и нажмите Enter или «Проверить»
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="footer-inner">
-            <strong>ООО «ГрандМедТех» — техническое обслуживание и ремонт медицинских изделий</strong>
-            тел.: <a href="tel:+73833110232">(383) 311-02-32</a> · e-mail: <a href="mailto:gmt@gmt54.ru">gmt@gmt54.ru</a>
-            <div class="footer-oferta">
-                © 2009–2025 ООО «ГрандМедТех». Размещённая информация не является публичной офертой.
-            </div>
-        </div>
-    </footer>
-
     <script>
         const WEBHOOK_RECEIPT = 'https://n8n.gmtnsk.ru/webhook/0f1113df-c046-450a-9bf8-5ed77f6c19da';
         const WEBHOOK_INSTITUTION = 'https://n8n.gmtnsk.ru/webhook/62f602d8-3319-40ef-ad4b-696edd331937';
 
-        // Технические названия стадий (как приходят из вебхука)
-        const STAGES_ORDER = [
-            "Новая", "Решение о ремонте", "Диагностика, ремонт",
-            "Заказаны ЗЧ", "ЗЧ получена", "Готово", "На выдачу"
-        ];
-
-        // Человеческие подписи для клиента
-        const STAGE_HUMAN_LABELS = {
-            "Новая": "Принято",
-            "Решение о ремонте": "Согласование",
-            "Диагностика, ремонт": "Ремонт",
-            "Заказаны ЗЧ": "Ждём запчасти",
-            "ЗЧ получена": "Запчасти пришли",
-            "Готово": "Ремонт завершён",
-            "На выдачу": "Готово к выдаче"
+        const STAGES_ORDER = ["Новая", "Решение о ремонте", "Диагностика, ремонт", "Заказаны ЗЧ", "ЗЧ получена", "Готово", "На выдачу"];
+        const STAGE_LABELS = {
+            "Новая": "Принято", "Решение о ремонте": "Согласование", "Диагностика, ремонт": "Ремонт",
+            "Заказаны ЗЧ": "Ждём запчасти", "ЗЧ получена": "Запчасти пришли", "Готово": "Ремонт завершён", "На выдачу": "Готово к выдаче"
         };
-
-        // Описания для всплывающих подсказок
         const STAGE_TOOLTIPS = {
-            "Новая": "Оборудование получено на участок и зарегистрировано.",
-            "Решение о ремонте": "Менеджер дал разрешение на ремонт.",
-            "Диагностика, ремонт": "Оборудование проходит диагностику и последующий ремонт.",
-            "Заказаны ЗЧ": "Оборудование продиагностировано, требуются запасные части / отправлено для ремонта производителю (специализированную организацию).",
-            "ЗЧ получена": "Запасные части получены, ремонт продолжается.",
-            "Готово": "Ремонт выполнен, оформляются документы, выставляются счета.",
-            "На выдачу": "Оборудование можно забирать."
+            "Новая": "Оборудование зарегистрировано.", "Решение о ремонте": "Менеджер дал разрешение.",
+            "Диагностика, ремонт": "Идет диагностика или ремонт.", "Заказаны ЗЧ": "Ожидание деталей.",
+            "ЗЧ получена": "Детали получены, ремонт продолжается.", "Готово": "Оформление документов.",
+            "На выдачу": "Можно забирать."
         };
+
+        // Обработка Enter
+        document.getElementById('receipt-id').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') checkByReceipt();
+        });
+        document.getElementById('institution-id').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') checkByInstitution();
+        });
 
         async function checkByReceipt() {
-            const id = document.getElementById('receipt-id').value.trim();
-            if (!id) { alert('Пожалуйста, введите номер квитанции'); return; }
-            await fetchData(WEBHOOK_RECEIPT, id, 'receipt');
+            const val = document.getElementById('receipt-id').value.trim();
+            if(val) fetchData(WEBHOOK_RECEIPT, val, 'receipt');
         }
 
         async function checkByInstitution() {
-            const id = document.getElementById('institution-id').value.trim();
-            if (!id) { alert('Пожалуйста, введите ID учреждения'); return; }
-            await fetchData(WEBHOOK_INSTITUTION, id, 'institution');
+            const val = document.getElementById('institution-id').value.trim();
+            if(val) fetchData(WEBHOOK_INSTITUTION, val, 'institution');
         }
 
-        async function fetchData(webhookUrl, value, searchType) {
-            showLoading(true);
-            showSkeleton();
+        async function fetchData(url, value, type) {
+            const container = document.getElementById('results-container');
+            container.innerHTML = '<div style="padding:20px; text-align:center; color:#aaa;">Загрузка данных...</div>';
+            
             try {
-                const response = await fetch(webhookUrl, {
+                const res = await fetch(url, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({ value: value })
                 });
-
-                if (!response.ok) throw new Error(`Ошибка сервера: ${response.status}`);
-
-                let data = await response.json();
-                console.log('Raw Response:', data);
-
-                if (data && typeof data === 'object' && !Array.isArray(data)) {
-                    if (Array.isArray(data.result)) data = data.result;
-                    else if (Array.isArray(data.json)) data = data.json;
-                    else if (Array.isArray(data.items)) data = data.items;
+                
+                let data = await res.json();
+                if (!Array.isArray(data)) {
+                    if (data.result && Array.isArray(data.result)) data = data.result;
+                    else if (data.json && Array.isArray(data.json)) data = data.json;
                     else data = [data];
-                } else if (!Array.isArray(data)) {
-                    data = [];
                 }
 
-                clearResults();
-
-                if (data.length === 0) {
-                    displayNoData();
-                    return;
-                }
-
-                displayResults(data, searchType);
-
-            } catch (error) {
-                console.error('Ошибка:', error);
-                alert('Ошибка при получении данных: ' + error.message);
-                clearResults();
-                displayNoData();
-            } finally {
-                showLoading(false);
+                renderResults(data, type);
+            } catch (e) {
+                container.innerHTML = '<div style="color:red; padding:20px; text-align:center;">Ошибка соединения</div>';
             }
         }
 
-        function showSkeleton() {
-            const resultsContainer = document.getElementById('results-container');
-            resultsContainer.innerHTML = `
-                <div class="skeleton-card" aria-hidden="true">
-                    <div class="skeleton-line w-40"></div>
-                    <div class="skeleton-line w-60"></div>
-                    <div class="skeleton-line w-80"></div>
-                    <div class="skeleton-line w-30"></div>
-                    <div class="skeleton-stepper"></div>
-                </div>
-            `;
-        }
+        function renderResults(items, type) {
+            const container = document.getElementById('results-container');
+            container.innerHTML = '';
+            
+            if(!items || items.length === 0) {
+                container.innerHTML = '<div style="padding:20px; text-align:center; color:#888;">Ничего не найдено</div>';
+                return;
+            }
 
-        function displayResults(items, searchType) {
-            const resultsContainer = document.getElementById('results-container');
+            items.forEach(item => {
+                const stage = item.stage || item["Стадия"] || "Неизвестно";
+                const activeIndex = STAGES_ORDER.findIndex(s => stage.toLowerCase().includes(s.toLowerCase()));
+                const idx = activeIndex > -1 ? activeIndex : 0;
 
-            const searchInfo = document.createElement('div');
-            searchInfo.style.cssText = 'margin-bottom: 15px; padding: 14px 18px; background: rgba(158,67,250,0.14); border: 1px solid rgba(158,67,250,0.35); border-radius: 10px; font-weight: 600; color: #d9b3ff; font-size: 13px; animation: fadeSlideIn 0.4s ease both;';
-            searchInfo.textContent = searchType === 'receipt'
-                ? `Найдено записей: ${items.length} (поиск по № квитанции)`
-                : `Найдено записей: ${items.length} (поиск по ID учреждения)`;
-            resultsContainer.appendChild(searchInfo);
-
-            items.forEach((item, idx) => {
-                const resultBlock = document.createElement('div');
-                resultBlock.className = 'result-item';
-                resultBlock.style.animationDelay = `${idx * 0.06}s`;
-
-                const ticket = item.ticket || item["№ Квитанции"] || "—";
-                const institution = item.institution || item["Учреждение"] || "—";
-                const equipment = item.equipment || item["Оборудование"] || "—";
-                const stage = item.stage || item.stages || item["Стадия"] || "—";
-                const date = item.date || item["Дата поступления на участок"] || "—";
-
-                const isFinalStage = stage && stage.toLowerCase() === "на выдачу";
-                const stageClass = isFinalStage ? 'field-value stage-highlight final-stage' : 'field-value stage-highlight';
-                const stageHtml = `<span class="${stageClass}">${stage}</span>`;
-
-                let fieldsHtml = `
-                    <div class="result-field">
-                        <span class="field-label">№ Квитанции:</span>
-                        <span class="field-value">${ticket}</span>
-                    </div>
-                    <div class="result-field">
-                        <span class="field-label">Учреждение:</span>
-                        <span class="field-value">${institution}</span>
-                    </div>
-                    <div class="result-field">
-                        <span class="field-label">Оборудование:</span>
-                        <span class="field-value">${equipment}</span>
-                    </div>
-                    <div class="result-field">
-                        <span class="field-label">Стадия:</span>
-                        ${stageHtml}
-                    </div>
-                    <div class="result-field">
-                        <span class="field-label">Дата поступления:</span>
-                        <span class="field-value">${date}</span>
-                    </div>
-                `;
-
-                resultBlock.innerHTML = fieldsHtml;
-
-                const progressWrapper = document.createElement('div');
-                progressWrapper.className = 'progress-wrapper';
-
-                const title = document.createElement('div');
-                title.className = 'progress-title';
-                title.textContent = 'Текущий статус ремонта';
-                progressWrapper.appendChild(title);
-
-                const stepperDiv = document.createElement('div');
-                stepperDiv.className = 'stepper';
-                stepperDiv.setAttribute('role', 'progressbar');
-                stepperDiv.setAttribute('aria-valuemin', '1');
-                stepperDiv.setAttribute('aria-valuemax', String(STAGES_ORDER.length));
-
-                let activeIndex = STAGES_ORDER.findIndex(s => s.toLowerCase() === stage.toLowerCase());
-                if (activeIndex === -1) {
-                    activeIndex = STAGES_ORDER.findIndex(s =>
-                        stage.toLowerCase().includes(s.toLowerCase()) ||
-                        s.toLowerCase().includes(stage.toLowerCase())
-                    );
-                }
-                if (activeIndex === -1) activeIndex = 0;
-
-                stepperDiv.setAttribute('aria-valuenow', String(activeIndex + 1));
-                stepperDiv.setAttribute('aria-valuetext', STAGES_ORDER[activeIndex]);
-
-                STAGES_ORDER.forEach((stageName, index) => {
-                    const isActive = index <= activeIndex;
-                    const isCurrent = index === activeIndex;
-                    const isFinal = stageName === "На выдачу";
-                    const stepDiv = document.createElement('div');
-                    stepDiv.className = `step ${isActive ? 'active' : ''} ${isCurrent ? 'current' : ''} ${isFinal ? 'final-step' : ''}`;
-                    stepDiv.setAttribute('tabindex', '0');
-                    stepDiv.setAttribute('role', 'button');
-                    stepDiv.setAttribute('aria-label', `${STAGE_HUMAN_LABELS[stageName]}: ${STAGE_TOOLTIPS[stageName]}`);
-
-                    if (isActive && isCurrent) {
-                        stepDiv.classList.add('no-line-after');
-                    }
-
-                    const tooltipText = STAGE_TOOLTIPS[stageName] || '';
-                    const tooltipDiv = document.createElement('div');
-                    tooltipDiv.className = 'step-tooltip';
-                    tooltipDiv.textContent = tooltipText;
-
-                    stepDiv.innerHTML = `
-                        <div class="step-circle">${index + 1}</div>
-                        <div class="step-human-label">${STAGE_HUMAN_LABELS[stageName]}</div>
+                let stepsHtml = '';
+                STAGES_ORDER.forEach((s, i) => {
+                    const isActive = i <= idx;
+                    stepsHtml += `
+                        <div class="step ${isActive ? 'active' : ''}">
+                            <div class="step-circle">${i+1}</div>
+                            <div class="step-label">${STAGE_LABELS[s]}</div>
+                            <div class="step-tooltip">${STAGE_TOOLTIPS[s]}</div>
+                        </div>
                     `;
-                    stepDiv.appendChild(tooltipDiv);
-
-                    stepperDiv.appendChild(stepDiv);
                 });
 
-                progressWrapper.appendChild(stepperDiv);
-
-                // Постоянная подсказка под активной точкой
-                const currentStageName = STAGES_ORDER[activeIndex];
-                const currentHint = document.createElement('div');
-                currentHint.className = 'step-current-hint' + (currentStageName === 'На выдачу' ? ' final' : '');
-                const hintIcon = currentStageName === 'На выдачу'
-                    ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>'
-                    : '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
-                currentHint.innerHTML = `${hintIcon}<span><strong>${STAGE_HUMAN_LABELS[currentStageName]}:</strong> ${STAGE_TOOLTIPS[currentStageName]}</span>`;
-
-                progressWrapper.appendChild(currentHint);
-
-                resultBlock.appendChild(progressWrapper);
-
-                resultsContainer.appendChild(resultBlock);
+                const div = document.createElement('div');
+                div.className = 'result-item';
+                div.innerHTML = `
+                    <div class="result-field"><span class="field-label">Квитанция:</span> <span class="field-value">${item.ticket || item["№ Квитанции"] || "-"}</span></div>
+                    <div class="result-field"><span class="field-label">Оборудование:</span> <span class="field-value">${item.equipment || item["Оборудование"] || "-"}</span></div>
+                    <div class="result-field"><span class="field-label">Статус:</span> <span class="field-value" style="color:#d9b3ff; font-weight:bold;">${stage}</span></div>
+                    
+                    <div class="stepper">
+                        ${stepsHtml}
+                    </div>
+                `;
+                container.appendChild(div);
             });
-        }
-
-        function clearResults() {
-            document.getElementById('results-container').innerHTML = '';
-        }
-
-        function displayNoData() {
-            document.getElementById('results-container').innerHTML =
-                '<div class="no-data">Данные не найдены</div>';
-        }
-
-        function showLoading(show) {
-            const container = document.querySelector('.container');
-            const btnReceipt = document.getElementById('btnCheckReceipt');
-            const btnInstitution = document.getElementById('btnCheckInstitution');
-
-            if (show) {
-                container.classList.add('loading');
-                btnReceipt.disabled = true;
-                btnInstitution.disabled = true;
-                btnReceipt.innerHTML = 'Проверка... <span class="spinner"></span>';
-                btnInstitution.innerHTML = 'Проверка... <span class="spinner"></span>';
-            } else {
-                container.classList.remove('loading');
-                btnReceipt.disabled = false;
-                btnInstitution.disabled = false;
-                btnReceipt.innerHTML = 'Проверить';
-                btnInstitution.innerHTML = 'Проверить';
-            }
         }
 
         function clearForm() {
             document.getElementById('receipt-id').value = '';
             document.getElementById('institution-id').value = '';
-            clearResults();
-            displayNoData();
+            document.getElementById('results-container').innerHTML = '<div style="padding:15px; text-align:center; color:#666; font-size:12px;">Форма очищена</div>';
         }
-
-        // Обработка нажатия Enter в полях ввода
-        document.getElementById('receipt-id').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                checkByReceipt();
-            }
-        });
-
-        document.getElementById('institution-id').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                checkByInstitution();
-            }
-        });
     </script>
 </body>
 </html>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700%7CPoppins:400,500,600,700&display=swap" rel="stylesheet">
-    <style>
-        /* =========================================================
-           Дизайн-токены
-           ========================================================= */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --wd-primary: #595ee0;
-            --gold-title: #f2d399;
-            --phone: #ffad00;
-            --violet: #9e43fa;
-            --violet-2: #a044ff;
-            --violet-deep: #6a3093;
-            --success: #459647;
-            --success-light: #57b95a;
-
-            --bg: #101010;
-            --bg-deep: #000000;
-            --bg-panel: rgba(0, 0, 0, 0.45);
-            --bg-panel-2: #17151c;
-            --text: #ffffff;
-            --text-soft: rgba(255, 255, 255, 0.78);
-            --text-muted: rgba(255, 255, 255, 0.55);
-            --text-dim: rgba(255, 255, 255, 0.4);
-            --border: rgba(255, 255, 255, 0.12);
-            --border-strong: rgba(255, 255, 255, 0.2);
-
-            --radius-sm: 5px;
-            --radius-md: 8px;
-            --radius-lg: 10px;
-            --radius-xl: 15px;
-
-            --grad-header: linear-gradient(272deg, rgb(84, 99, 130) 0%, rgb(92, 66, 131) 98%);
-            --grad-btn: linear-gradient(to right, #6a3093 0%, #a044ff 51%, #6a3093 100%);
-            --grad-panel: linear-gradient(87deg, rgba(155, 63, 212, 1) 0%, rgba(118, 54, 223, 1) 98%);
-            --grad-stepper: linear-gradient(135deg, #6a3093 0%, #a044ff 100%);
-
-            --glow-violet: 0 0 10px rgba(163, 70, 244, 0.35);
-            --box-glow: rgb(119 54 222) -1px 11px 35px -20px, rgb(152 62 212) 1px 1px 20px -30px, rgb(119 54 223) 0 1px 20px 0 inset;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        body {
-            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            background-color: var(--bg);
-            background-image:
-                radial-gradient(circle at 12% 0%, rgba(106, 48, 147, 0.45) 0%, rgba(106, 48, 147, 0) 45%),
-                radial-gradient(circle at 88% 12%, rgba(89, 94, 224, 0.28) 0%, rgba(89, 94, 224, 0) 42%),
-                radial-gradient(circle at 50% 115%, rgba(50, 39, 61, 0.85) 0%, rgba(16, 16, 16, 0) 65%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
-        .page {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px 20px 40px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            position: relative;
-            width: 100%;
-            max-width: 900px; /* Единая ширина для шапки и контента */
-            background: var(--bg-panel);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            box-shadow: var(--box-glow), 0 30px 60px -30px rgba(0, 0, 0, 0.9);
-            overflow: visible; /* Важно для тултипов */
-        }
-
-        /* ===== ШАПКА ВНУТРИ КОНТЕЙНЕРА ===== */
-        .site-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 14px 26px;
-            background: var(--grad-header);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            border-radius: var(--radius-xl) var(--radius-xl) 0 0; /* Скругление только сверху */
-            box-shadow: 0 0 10px rgba(163, 70, 244, 0.35);
-            color: #fff;
-        }
-
-        .site-logo {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            text-decoration: none;
-            color: #fff;
-            min-width: 0;
-        }
-
-        .site-logo img {
-            height: 46px;
-            width: auto;
-            display: block;
-        }
-
-        .site-logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.25;
-            min-width: 0;
-        }
-
-        .site-logo-text b {
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .site-logo-text span {
-            font-size: 11.5px;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.75);
-        }
-
-        .site-contacts {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 2px;
-            text-align: right;
-        }
-
-        .site-contacts a {
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 1.3;
-            white-space: nowrap;
-        }
-
-        .site-phone { color: var(--phone); }
-        .site-mail { color: #ffffff; font-size: 15px !important; }
-        .site-contacts a:hover { text-decoration: underline; }
-
-        /* ===== ЗАГОЛОВОК БЛОКА ===== */
-        .header {
-            padding: 20px 30px 16px; /* Уменьшен отступ */
-            text-align: center;
-            background: linear-gradient(180deg, rgba(155, 63, 212, 0.16) 0%, rgba(0, 0, 0, 0) 100%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .header .card-title {
-            font-size: 24px; /* Чуть меньше */
-            font-weight: 600;
-            line-height: 1.3;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .header .card-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            margin: 10px auto 0;
-            border-radius: 3px;
-            background: var(--grad-panel);
-        }
-
-        .header p {
-            font-size: 13px;
-            line-height: 1.5;
-            color: var(--text-soft);
-            max-width: 520px;
-            margin: 0 auto;
-        }
-
-        .content { padding: 20px 30px 24px; } /* Уменьшен отступ */
-
-        /* ===== СЕКЦИИ ПОИСКА ===== */
-        .search-section {
-            margin-bottom: 16px; /* Меньше отступ между блоками */
-            padding: 18px 20px; /* Компактнее внутренние отступы */
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            transition: var(--transition);
-        }
-
-        .search-section:hover {
-            border-color: rgba(158, 67, 250, 0.55);
-            box-shadow: var(--glow-violet);
-        }
-
-        .search-section h3 {
-            position: relative;
-            font-family: 'Poppins', Arial, sans-serif;
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 10px;
-            margin-bottom: 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .search-section h3::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -1px;
-            width: 70px;
-            height: 2px;
-            background: var(--grad-panel);
-        }
-
-        .search-section h3 svg {
-            width: 18px;
-            height: 18px;
-            stroke: #c39bf5;
-            fill: none;
-            stroke-width: 1.8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            flex-shrink: 0;
-        }
-
-        .input-group { margin-bottom: 6px; }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 12.5px;
-            font-weight: 500;
-            color: var(--text-soft);
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px 16px; /* Уменьшена высота поля */
-            background: #ffffff;
-            border: 1px solid rgba(158, 67, 250, 0.35);
-            border-radius: var(--radius-md);
-            font-family: inherit;
-            font-size: 15px;
-            font-weight: 400;
-            color: #333333;
-            box-shadow: 0 6px 11px 0 rgba(116, 117, 126, 0.28);
-            transition: var(--transition);
-        }
-
-        .input-group input::placeholder { color: #9a9aa5; }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--violet);
-            box-shadow: 0 0 0 4px rgba(158, 67, 250, 0.18), 0 6px 14px 0 rgba(116, 117, 126, 0.3);
-        }
-
-        .input-hint {
-            display: flex;
-            align-items: flex-start;
-            gap: 7px;
-            margin: 8px 0 12px;
-            font-size: 11.5px;
-            line-height: 1.45;
-            color: var(--text-muted);
-        }
-
-        .input-hint svg {
-            width: 14px;
-            height: 14px;
-            margin-top: 1px;
-            flex-shrink: 0;
-            stroke: #c39bf5;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        /* ===== КНОПКИ ===== */
-        .button-group { display: flex; gap: 12px; }
-
-        button {
-            flex: 1;
-            padding: 12px 20px; /* Компактнее кнопки */
-            border: 1px solid transparent;
-            border-radius: var(--radius-lg);
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background-position 0.5s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        button:focus-visible {
-            outline: 2px solid var(--violet-2);
-            outline-offset: 3px;
-        }
-
-        .btn-primary {
-            background-image: var(--grad-btn);
-            background-size: 200% auto;
-            background-position: left center;
-            color: #ffffff;
-            box-shadow: 0 0 10px rgba(238, 238, 238, 0.18), 0 10px 26px -12px rgba(160, 68, 255, 0.9);
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            background-position: right center;
-            box-shadow: 0 0 14px rgba(163, 70, 244, 0.45), 0 12px 30px -12px rgba(160, 68, 255, 1);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #ffffff;
-            border-color: var(--border-strong);
-        }
-
-        .btn-secondary:hover:not(:disabled) {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        button:disabled {
-            opacity: 0.55;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        /* ===== РЕЗУЛЬТАТЫ ===== */
-        .results-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 20px 0 14px;
-            padding-bottom: 10px;
-            font-family: 'Poppins', Arial, sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-            color: #ffffff;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .results-header::before {
-            content: '';
-            width: 4px;
-            height: 18px;
-            border-radius: 2px;
-            background: var(--grad-panel);
-        }
-
-        #results-container { min-height: 50px; }
-
-        .result-item {
-            margin-bottom: 20px;
-            padding: 18px;
-            background: var(--bg-panel-2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--box-glow);
-            animation: fadeSlideIn 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
-            transition: var(--transition);
-        }
-
-        @keyframes fadeSlideIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-item:hover {
-            border-color: rgba(158, 67, 250, 0.6);
-            box-shadow: var(--box-glow), var(--glow-violet);
-        }
-
-        .result-field {
-            display: flex;
-            margin-bottom: 4px;
-            padding: 2px 0;
-            font-size: 13.5px;
-            line-height: 1.5;
-        }
-
-        .field-label {
-            min-width: 150px;
-            flex-shrink: 0;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        .field-value {
-            flex: 1;
-            color: var(--text-soft);
-            font-weight: 400;
-        }
-
-        .field-value.stage-highlight {
-            display: inline-block;
-            padding: 2px 10px;
-            border: 1px solid rgba(158, 67, 250, 0.5);
-            border-radius: var(--radius-sm);
-            background: rgba(158, 67, 250, 0.18);
-            color: #d9b3ff;
-            font-weight: 600;
-        }
-
-        .field-value.stage-highlight.final-stage {
-            border-color: rgba(69, 150, 71, 0.6);
-            background: rgba(69, 150, 71, 0.22);
-            color: #8fe093;
-        }
-
-        .no-data {
-            padding: 30px 20px;
-            text-align: center;
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        /* ===== СКЕЛЕТОН ===== */
-        .skeleton-card {
-            margin-bottom: 20px;
-            padding: 18px;
-            background: var(--bg-panel-2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-xl);
-        }
-
-        .skeleton-line {
-            height: 12px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(163,70,244,0.22) 50%, rgba(255,255,255,0.04) 100%);
-            background-size: 200% 100%;
-            animation: shimmer 1.4s ease-in-out infinite;
-        }
-
-        .skeleton-line.w-40 { width: 40%; }
-        .skeleton-line.w-60 { width: 60%; }
-        .skeleton-line.w-80 { width: 80%; }
-        .skeleton-line.w-30 { width: 30%; }
-
-        .skeleton-stepper {
-            height: 50px;
-            margin-top: 14px;
-            border-radius: var(--radius-lg);
-            background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(163,70,244,0.18) 50%, rgba(255,255,255,0.03) 100%);
-            background-size: 200% 100%;
-            animation: shimmer 1.4s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%   { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* ===== ШКАЛА ПРОГРЕССА ===== */
-        .progress-wrapper {
-            margin-top: 16px;
-            padding: 0 0 12px;
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-xl);
-            overflow: visible; /* Разрешаем выход тултипам */
-        }
-
-        .progress-title {
-            margin-bottom: 16px;
-            padding: 10px 20px;
-            text-align: center;
-            font-family: 'Poppins', Arial, sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            color: #ffffff;
-            background-image: var(--grad-panel);
-            box-shadow: 0 0 10px rgba(238, 238, 238, 0.12);
-        }
-
-        .stepper {
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            max-width: 720px;
-            margin: 20px auto 0;
-            padding: 0 12px;
-        }
-
-        .stepper::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            border-radius: 2px;
-            background: rgba(255, 255, 255, 0.12);
-            z-index: 0;
-        }
-
-        .step {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            outline: none;
-        }
-
-        .step-circle {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            margin-bottom: 6px;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            background: #201d26;
-            color: var(--text-muted);
-            font-size: 11px;
-            font-weight: 700;
-            transition: var(--transition);
-        }
-
-        .step-human-label {
-            max-width: 80px;
-            font-size: 10px;
-            font-weight: 500;
-            line-height: 1.2;
-            text-align: center;
-            color: var(--text-muted);
-            white-space: normal;
-            transition: var(--transition);
-        }
-
-        .step.active .step-circle {
-            background-image: var(--grad-stepper);
-            border-color: var(--violet-2);
-            color: #ffffff;
-            box-shadow: 0 0 0 4px rgba(158, 67, 250, 0.18), 0 0 18px rgba(163, 70, 244, 0.5);
-        }
-
-        .step.current .step-circle { animation: pulseViolet 1.8s ease-in-out infinite; }
-        .step.final-step.current .step-circle { animation: pulseGreen 1.8s ease-in-out infinite; }
-
-        @keyframes pulseViolet {
-            0%, 100% { box-shadow: 0 0 0 4px rgba(158, 67, 250, 0.18), 0 0 18px rgba(163, 70, 244, 0.5); transform: scale(1); }
-            50% { box-shadow: 0 0 0 8px rgba(158, 67, 250, 0.1), 0 0 28px rgba(163, 70, 244, 0.55); transform: scale(1.08); }
-        }
-
-        @keyframes pulseGreen {
-            0%, 100% { box-shadow: 0 0 0 4px rgba(69, 150, 71, 0.22), 0 0 18px rgba(69, 150, 71, 0.5); transform: scale(1); }
-            50% { box-shadow: 0 0 0 8px rgba(69, 150, 71, 0.12), 0 0 30px rgba(69, 150, 71, 0.55); transform: scale(1.1); }
-        }
-
-        .step.active .step-human-label { color: #d9b3ff; font-weight: 600; }
-
-        .step.final-step .step-circle {
-            background-image: linear-gradient(135deg, #459647 0%, #57b95a 100%) !important;
-            border-color: var(--success-light) !important;
-            color: #ffffff !important;
-            box-shadow: 0 0 0 4px rgba(69, 150, 71, 0.22), 0 0 18px rgba(69, 150, 71, 0.5) !important;
-        }
-
-        .step.final-step .step-human-label { color: #8fe093 !important; font-weight: 700 !important; }
-
-        .step:last-child::after { display: none !important; }
-        .step:not(.active)::after { display: none; }
-
-        .step.active::after {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            width: 100%;
-            height: 2px;
-            border-radius: 2px;
-            background-image: var(--grad-stepper);
-            z-index: 1;
-        }
-
-        .step.final-step.active::after { background-image: linear-gradient(90deg, #459647, #57b95a) !important; }
-        .step.active.no-line-after::after { display: none; }
-
-        /* ===== ПОДСКАЗКА ПОД АКТИВНОЙ ТОЧКОЙ ===== */
-        .step-current-hint {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin: 16px 20px 0;
-            padding: 10px 14px;
-            background: rgba(158, 67, 250, 0.12);
-            border: 1px solid rgba(158, 67, 250, 0.3);
-            border-left: 3px solid var(--violet);
-            border-radius: var(--radius-md);
-            font-size: 12px;
-            line-height: 1.5;
-            color: var(--text-soft);
-        }
-
-        .step-current-hint.final {
-            background: rgba(69, 150, 71, 0.14);
-            border-color: rgba(69, 150, 71, 0.35);
-            border-left-color: var(--success);
-        }
-
-        .step-current-hint svg {
-            width: 14px;
-            height: 14px;
-            margin-top: 1px;
-            flex-shrink: 0;
-            stroke: #c39bf5;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .step-current-hint.final svg { stroke: #8fe093; }
-
-        /* ===== ВСПЛЫВАЮЩИЕ ОКНА (TOOLTIPS) - ИСПРАВЛЕНО ===== */
-        .step-tooltip {
-            visibility: hidden;
-            opacity: 0;
-            position: absolute;
-            bottom: calc(100% + 10px); /* Поднимаем выше */
-            left: 50%;
-            transform: translateX(-50%) translateY(4px);
-            z-index: 9999; /* Очень высокий z-index, чтобы быть поверх всего */
-            width: 260px; /* Немного шире */
-            padding: 12px 14px;
-            background: #14121a;
-            border: 1px solid rgba(158, 67, 250, 0.45);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), var(--glow-violet);
-            color: #e8e3f2;
-            font-size: 12px;
-            font-weight: 400;
-            line-height: 1.5;
-            text-align: center;
-            white-space: normal;
-            pointer-events: none;
-            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-        }
-
-        .step-tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 6px solid transparent;
-            border-top-color: #14121a;
-        }
-
-        .step:hover .step-tooltip,
-        .step:focus-visible .step-tooltip {
-            visibility: visible;
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* ===== ЗАГРУЗКА ===== */
-        .loading { opacity: 0.75; pointer-events: none; }
-
-        .spinner {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            margin-left: 8px;
-            vertical-align: middle;
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            border-top-color: #ffffff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* ===== ПОДВАЛ ===== */
-        .footer {
-            margin-top: auto;
-            padding: 24px 20px 20px;
-            background-color: var(--bg-deep);
-            background-image: radial-gradient(ellipse at 50% 130%, rgba(106, 48, 147, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 -1px 20px rgba(163, 70, 244, 0.18);
-            text-align: center;
-            font-size: 12px;
-            line-height: 1.6;
-            color: var(--text-muted);
-        }
-
-        .footer-inner {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .footer strong {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 6px;
-        }
-
-        .footer a { color: var(--phone); text-decoration: none; }
-        .footer a:hover { text-decoration: underline; }
-
-        .footer .footer-oferta {
-            margin-top: 10px;
-            font-size: 11px;
-            color: var(--text-dim);
-        }
-
-        /* ===== АДАПТИВ ===== */
-        @media (max-width: 768px) {
-            .page { padding: 10px 10px 30px; }
-            
-            .site-header { 
-                padding: 12px 16px; 
-                flex-direction: column; 
-                align-items: center; 
-                text-align: center;
-            }
-            
-            .site-contacts { align-items: center; margin-top: 8px; }
-            .site-logo img { height: 36px; }
-            .site-logo-text b { font-size: 14px; }
-            .site-logo-text span { display: none; }
-            .site-contacts a { font-size: 15px; }
-
-            .header { padding: 16px 16px 12px; }
-            .header .card-title { font-size: 20px; }
-            
-            .content { padding: 16px; }
-            .search-section { padding: 16px; }
-            .button-group { flex-direction: column; }
-
-            .stepper {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-                padding: 0;
-            }
-
-            .stepper::before { display: none; }
-
-            .step {
-                flex: 0 0 44%;
-                flex-direction: row;
-                align-items: center;
-                gap: 8px;
-                margin-bottom: 8px;
-            }
-
-            .step-circle {
-                width: 26px;
-                height: 26px;
-                margin-bottom: 0;
-                font-size: 10px;
-                flex-shrink: 0;
-            }
-
-            .step-human-label { max-width: none; text-align: left; font-size: 11px; }
-            .step.active::after { display: none !important; }
-
-            .field-label { min-width: 100px; font-size: 12px; }
-            .field-value { font-size: 13px; }
-
-            .step-tooltip {
-                left: 0;
-                width: 200px;
-                font-size: 11px;<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Статус ремонта · ГрандМедТех</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700%7CPoppins:400,500,600,700&display=swap" rel="stylesheet">
-    <style>
-        /* =========================================================
-           Дизайн-токены
-           ========================================================= */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --wd-primary: #595ee0;
-            --gold-title: #f2d399;
-            --phone: #ffad00;
-            --violet: #9e43fa;
-            --violet-2: #a044ff;
-            --violet-deep: #6a3093;
-            --success: #459647;
-            --success-light: #57b95a;
-
-            --bg: #101010;
-            --bg-deep: #000000;
-            --bg-panel: rgba(0, 0, 0, 0.45);
-            --bg-panel-2: #17151c;
-            --text: #ffffff;
-            --text-soft: rgba(255, 255, 255, 0.78);
-            --text-muted: rgba(255, 255, 255, 0.55);
-            --text-dim: rgba(255, 255, 255, 0.4);
-            --border: rgba(255, 255, 255, 0.12);
-            --border-strong: rgba(255, 255, 255, 0.2);
-
-            --radius-sm: 5px;
-            --radius-md: 8px;
-            --radius-lg: 10px;
-            --radius-xl: 15px;
-
-            --grad-header: linear-gradient(272deg, rgb(84, 99, 130) 0%, rgb(92, 66, 131) 98%);
-            --grad-btn: linear-gradient(to right, #6a3093 0%, #a044ff 51%, #6a3093 100%);
-            --grad-panel: linear-gradient(87deg, rgba(155, 63, 212, 1) 0%, rgba(118, 54, 223, 1) 98%);
-            --grad-stepper: linear-gradient(135deg, #6a3093 0%, #a044ff 100%);
-
-            --glow-violet: 0 0 10px rgba(163, 70, 244, 0.35);
-            --box-glow: rgb(119 54 222) -1px 11px 35px -20px, rgb(152 62 212) 1px 1px 20px -30px, rgb(119 54 223) 0 1px 20px 0 inset;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        body {
-            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            background-color: var(--bg);
-            background-image:
-                radial-gradient(circle at 12% 0%, rgba(106, 48, 147, 0.45) 0%, rgba(106, 48, 147, 0) 45%),
-                radial-gradient(circle at 88% 12%, rgba(89, 94, 224, 0.28) 0%, rgba(89, 94, 224, 0) 42%),
-                radial-gradient(circle at 50% 115%, rgba(50, 39, 61, 0.85) 0%, rgba(16, 16, 16, 0) 65%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
-        .page {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px 20px 40px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            position: relative;
-            width: 100%;
-            max-width: 900px; /* Единая ширина для шапки и контента */
-            background: var(--bg-panel);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            box-shadow: var(--box-glow), 0 30px 60px -30px rgba(0, 0, 0, 0.9);
-            overflow: visible; /* Важно для тултипов */
-        }
-
-        /* ===== ШАПКА ВНУТРИ КОНТЕЙНЕРА ===== */
-        .site-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 14px 26px;
-            background: var(--grad-header);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            border-radius: var(--radius-xl) var(--radius-xl) 0 0; /* Скругление только сверху */
-            box-shadow: 0 0 10px rgba(163, 70, 244, 0.35);
-            color: #fff;
-        }
-
-        .site-logo {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            text-decoration: none;
-            color: #fff;
-            min-width: 0;
-        }
-
-        .site-logo img {
-            height: 46px;
-            width: auto;
-            display: block;
-        }
-
-        .site-logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.25;
-            min-width: 0;
-        }
-
-        .site-logo-text b {
-            font-size: 16px;
-            font-weight: 600;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .site-logo-text span {
-            font-size: 11.5px;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.75);
-        }
-
-        .site-contacts {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 2px;
-            text-align: right;
-        }
-
-        .site-contacts a {
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 1.3;
-            white-space: nowrap;
-        }
-
-        .site-phone { color: var(--phone); }
-        .site-mail { color: #ffffff; font-size: 15px !important; }
-        .site-contacts a:hover { text-decoration: underline; }
-
-        /* ===== ЗАГОЛОВОК БЛОКА ===== */
-        .header {
-            padding: 20px 30px 16px; /* Уменьшен отступ */
-            text-align: center;
-            background: linear-gradient(180deg, rgba(155, 63, 212, 0.16) 0%, rgba(0, 0, 0, 0) 100%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .header .card-title {
-            font-size: 24px; /* Чуть меньше */
-            font-weight: 600;
-            line-height: 1.3;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .header .card-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            margin: 10px auto 0;
-            border-radius: 3px;
-            background: var(--grad-panel);
-        }
-
-        .header p {
-            font-size: 13px;
-            line-height: 1.5;
-            color: var(--text-soft);
-            max-width: 520px;
-            margin: 0 auto;
-        }
-
-        .content { padding: 20px 30px 24px; } /* Уменьшен отступ */
-
-        /* ===== СЕКЦИИ ПОИСКА ===== */
-        .search-section {
-            margin-bottom: 16px; /* Меньше отступ между блоками */
-            padding: 18px 20px; /* Компактнее внутренние отступы */
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            transition: var(--transition);
-        }
-
-        .search-section:hover {
-            border-color: rgba(158, 67, 250, 0.55);
-            box-shadow: var(--glow-violet);
-        }
-
-        .search-section h3 {
-            position: relative;
-            font-family: 'Poppins', Arial, sans-serif;
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 10px;
-            margin-bottom: 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .search-section h3::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -1px;
-            width: 70px;
-            height: 2px;
-            background: var(--grad-panel);
-        }
-
-        .search-section h3 svg {
-            width: 18px;
-            height: 18px;
-            stroke: #c39bf5;
-            fill: none;
-            stroke-width: 1.8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            flex-shrink: 0;
-        }
-
-        .input-group { margin-bottom: 6px; }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 12.5px;
-            font-weight: 500;
-            color: var(--text-soft);
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 12px 16px; /* Уменьшена высота поля */
-            background: #ffffff;
-            border: 1px solid rgba(158, 67, 250, 0.35);
-            border-radius: var(--radius-md);
-            font-family: inherit;
-            font-size: 15px;
-            font-weight: 400;
-            color: #333333;
-            box-shadow: 0 6px 11px 0 rgba(116, 117, 126, 0.28);
-            transition: var(--transition);
-        }
-
-        .input-group input::placeholder { color: #9a9aa5; }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--violet);
-            box-shadow: 0 0 0 4px rgba(158, 67, 250, 0.18), 0 6px 14px 0 rgba(116, 117, 126, 0.3);
-        }
-
-        .input-hint {
-            display: flex;
-            align-items: flex-start;
-            gap: 7px;
-            margin: 8px 0 12px;
-            font-size: 11.5px;
-            line-height: 1.45;
-            color: var(--text-muted);
-        }
-
-        .input-hint svg {
-            width: 14px;
-            height: 14px;
-            margin-top: 1px;
-            flex-shrink: 0;
-            stroke: #c39bf5;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        /* ===== КНОПКИ ===== */
-        .button-group { display: flex; gap: 12px; }
-
-        button {
-            flex: 1;
-            padding: 12px 20px; /* Компактнее кнопки */
-            border: 1px solid transparent;
-            border-radius: var(--radius-lg);
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background-position 0.5s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        button:focus-visible {
-            outline: 2px solid var(--violet-2);
-            outline-offset: 3px;
-        }
-
-        .btn-primary {
-            background-image: var(--grad-btn);
-            background-size: 200% auto;
-            background-position: left center;
-            color: #ffffff;
-            box-shadow: 0 0 10px rgba(238, 238, 238, 0.18), 0 10px 26px -12px rgba(160, 68, 255, 0.9);
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            background-position: right center;
-            box-shadow: 0 0 14px rgba(163, 70, 244, 0.45), 0 12px 30px -12px rgba(160, 68, 255, 1);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #ffffff;
-            border-color: var(--border-strong);
-        }
-
-        .btn-secondary:hover:not(:disabled) {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        button:disabled {
-            opacity: 0.55;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        /* ===== РЕЗУЛЬТАТЫ ===== */
-        .results-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 20px 0 14px;
-            padding-bottom: 10px;
-            font-family: 'Poppins', Arial, sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-            color: #ffffff;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .results-header::before {
-            content: '';
-            width: 4px;
-            height: 18px;
-            border-radius: 2px;
-            background: var(--grad-panel);
-        }
-
-        #results-container { min-height: 50px; }
-
-        .result-item {
-            margin-bottom: 20px;
-            padding: 18px;
-            background: var(--bg-panel-2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--box-glow);
-            animation: fadeSlideIn 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
-            transition: var(--transition);
-        }
-
-        @keyframes fadeSlideIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-item:hover {
-            border-color: rgba(158, 67, 250, 0.6);
-            box-shadow: var(--box-glow), var(--glow-violet);
-        }
-
-        .result-field {
-            display: flex;
-            margin-bottom: 4px;
-            padding: 2px 0;
-            font-size: 13.5px;
-            line-height: 1.5;
-        }
-
-        .field-label {
-            min-width: 150px;
-            flex-shrink: 0;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        .field-value {
-            flex: 1;
-            color: var(--text-soft);
-            font-weight: 400;
-        }
-
-        .field-value.stage-highlight {
-            display: inline-block;
-            padding: 2px 10px;
-            border: 1px solid rgba(158, 67, 250, 0.5);
-            border-radius: var(--radius-sm);
-            background: rgba(158, 67, 250, 0.18);
-            color: #d9b3ff;
-            font-weight: 600;
-        }
-
-        .field-value.stage-highlight.final-stage {
-            border-color: rgba(69, 150, 71, 0.6);
-            background: rgba(69, 150, 71, 0.22);
-            color: #8fe093;
-        }
-
-        .no-data {
-            padding: 30px 20px;
-            text-align: center;
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        /* ===== СКЕЛЕТОН ===== */
-        .skeleton-card {
-            margin-bottom: 20px;
-            padding: 18px;
-            background: var(--bg-panel-2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-xl);
-        }
-
-        .skeleton-line {
-            height: 12px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(163,70,244,0.22) 50%, rgba(255,255,255,0.04) 100%);
-            background-size: 200% 100%;
-            animation: shimmer 1.4s ease-in-out infinite;
-        }
-
-        .skeleton-line.w-40 { width: 40%; }
-        .skeleton-line.w-60 { width: 60%; }
-        .skeleton-line.w-80 { width: 80%; }
-        .skeleton-line.w-30 { width: 30%; }
-
-        .skeleton-stepper {
-            height: 50px;
-            margin-top: 14px;
-            border-radius: var(--radius-lg);
-            background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(163,70,244,0.18) 50%, rgba(255,255,255,0.03) 100%);
-            background-size: 200% 100%;
-            animation: shimmer 1.4s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%   { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* ===== ШКАЛА ПРОГРЕССА ===== */
-        .progress-wrapper {
-            margin-top: 16px;
-            padding: 0 0 12px;
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-xl);
-            overflow: visible; /* Разрешаем выход тултипам */
-        }
-
-        .progress-title {
-            margin-bottom: 16px;
-            padding: 10px 20px;
-            text-align: center;
-            font-family: 'Poppins', Arial, sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            color: #ffffff;
-            background-image: var(--grad-panel);
-            box-shadow: 0 0 10px rgba(238, 238, 238, 0.12);
-        }
-
-        .stepper {
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            max-width: 720px;
-            margin: 20px auto 0;
-            padding: 0 12px;
-        }
-
-        .stepper::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            border-radius: 2px;
-            background: rgba(255, 255, 255, 0.12);
-            z-index: 0;
-        }
-
-        .step {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            outline: none;
-        }
-
-        .step-circle {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            margin-bottom: 6px;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            background: #201d26;
-            color: var(--text-muted);
-            font-size: 11px;
-            font-weight: 700;
-            transition: var(--transition);
-        }
-
-        .step-human-label {
-            max-width: 80px;
-            font-size: 10px;
-            font-weight: 500;
-            line-height: 1.2;
-            text-align: center;
-            color: var(--text-muted);
-            white-space: normal;
-            transition: var(--transition);
-        }
-
-        .step.active .step-circle {
-            background-image: var(--grad-stepper);
-            border-color: var(--violet-2);
-            color: #ffffff;
-            box-shadow: 0 0 0 4px rgba(158, 67, 250, 0.18), 0 0 18px rgba(163, 70, 244, 0.5);
-        }
-
-        .step.current .step-circle { animation: pulseViolet 1.8s ease-in-out infinite; }
-        .step.final-step.current .step-circle { animation: pulseGreen 1.8s ease-in-out infinite; }
-
-        @keyframes pulseViolet {
-            0%, 100% { box-shadow: 0 0 0 4px rgba(158, 67, 250, 0.18), 0 0 18px rgba(163, 70, 244, 0.5); transform: scale(1); }
-            50% { box-shadow: 0 0 0 8px rgba(158, 67, 250, 0.1), 0 0 28px rgba(163, 70, 244, 0.55); transform: scale(1.08); }
-        }
-
-        @keyframes pulseGreen {
-            0%, 100% { box-shadow: 0 0 0 4px rgba(69, 150, 71, 0.22), 0 0 18px rgba(69, 150, 71, 0.5); transform: scale(1); }
-            50% { box-shadow: 0 0 0 8px rgba(69, 150, 71, 0.12), 0 0 30px rgba(69, 150, 71, 0.55); transform: scale(1.1); }
-        }
-
-        .step.active .step-human-label { color: #d9b3ff; font-weight: 600; }
-
-        .step.final-step .step-circle {
-            background-image: linear-gradient(135deg, #459647 0%, #57b95a 100%) !important;
-            border-color: var(--success-light) !important;
-            color: #ffffff !important;
-            box-shadow: 0 0 0 4px rgba(69, 150, 71, 0.22), 0 0 18px rgba(69, 150, 71, 0.5) !important;
-        }
-
-        .step.final-step .step-human-label { color: #8fe093 !important; font-weight: 700 !important; }
-
-        .step:last-child::after { display: none !important; }
-        .step:not(.active)::after { display: none; }
-
-        .step.active::after {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            width: 100%;
-            height: 2px;
-            border-radius: 2px;
-            background-image: var(--grad-stepper);
-            z-index: 1;
-        }
-
-        .step.final-step.active::after { background-image: linear-gradient(90deg, #459647, #57b95a) !important; }
-        .step.active.no-line-after::after { display: none; }
-
-        /* ===== ПОДСКАЗКА ПОД АКТИВНОЙ ТОЧКОЙ ===== */
-        .step-current-hint {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin: 16px 20px 0;
-            padding: 10px 14px;
-            background: rgba(158, 67, 250, 0.12);
-            border: 1px solid rgba(158, 67, 250, 0.3);
-            border-left: 3px solid var(--violet);
-            border-radius: var(--radius-md);
-            font-size: 12px;
-            line-height: 1.5;
-            color: var(--text-soft);
-        }
-
-        .step-current-hint.final {
-            background: rgba(69, 150, 71, 0.14);
-            border-color: rgba(69, 150, 71, 0.35);
-            border-left-color: var(--success);
-        }
-
-        .step-current-hint svg {
-            width: 14px;
-            height: 14px;
-            margin-top: 1px;
-            flex-shrink: 0;
-            stroke: #c39bf5;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .step-current-hint.final svg { stroke: #8fe093; }
-
-        /* ===== ВСПЛЫВАЮЩИЕ ОКНА (TOOLTIPS) - ИСПРАВЛЕНО ===== */
-        .step-tooltip {
-            visibility: hidden;
-            opacity: 0;
-            position: absolute;
-            bottom: calc(100% + 10px); /* Поднимаем выше */
-            left: 50%;
-            transform: translateX(-50%) translateY(4px);
-            z-index: 9999; /* Очень высокий z-index, чтобы быть поверх всего */
-            width: 260px; /* Немного шире */
-            padding: 12px 14px;
-            background: #14121a;
-            border: 1px solid rgba(158, 67, 250, 0.45);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), var(--glow-violet);
-            color: #e8e3f2;
-            font-size: 12px;
-            font-weight: 400;
-            line-height: 1.5;
-            text-align: center;
-            white-space: normal;
-            pointer-events: none;
-            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-        }
-
-        .step-tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 6px solid transparent;
-            border-top-color: #14121a;
-        }
-
-        .step:hover .step-tooltip,
-        .step:focus-visible .step-tooltip {
-            visibility: visible;
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* ===== ЗАГРУЗКА ===== */
-        .loading { opacity: 0.75; pointer-events: none; }
-
-        .spinner {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            margin-left: 8px;
-            vertical-align: middle;
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            border-top-color: #ffffff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* ===== ПОДВАЛ ===== */
-        .footer {
-            margin-top: auto;
-            padding: 24px 20px 20px;
-            background-color: var(--bg-deep);
-            background-image: radial-gradient(ellipse at 50% 130%, rgba(106, 48, 147, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 -1px 20px rgba(163, 70, 244, 0.18);
-            text-align: center;
-            font-size: 12px;
-            line-height: 1.6;
-            color: var(--text-muted);
-        }
-
-        .footer-inner {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .footer strong {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 6px;
-        }
-
-        .footer a { color: var(--phone); text-decoration: none; }
-        .footer a:hover { text-decoration: underline; }
-
-        .footer .footer-oferta {
-            margin-top: 10px;
-            font-size: 11px;
-            color: var(--text-dim);
-        }
-
-        /* ===== АДАПТИВ ===== */
-        @media (max-width: 768px) {
-            .page { padding: 10px 10px 30px; }
-            
-            .site-header { 
-                padding: 12px 16px; 
-                flex-direction: column; 
-                align-items: center; 
-                text-align: center;
-            }
-            
-            .site-contacts { align-items: center; margin-top: 8px; }
-            .site-logo img { height: 36px; }
-            .site-logo-text b { font-size: 14px; }
-            .site-logo-text span { display: none; }
-            .site-contacts a { font-size: 15px; }
-
-            .header { padding: 16px 16px 12px; }
-            .header .card-title { font-size: 20px; }
-            
-            .content { padding: 16px; }
-            .search-section { padding: 16px; }
-            .button-group { flex-direction: column; }
-
-            .stepper {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-                padding: 0;
-            }
-
-            .stepper::before { display: none; }
-
-            .step {
-                flex: 0 0 44%;
-                flex-direction: row;
-                align-items: center;
-                gap: 8px;
-                margin-bottom: 8px;
-            }
-
-            .step-circle {
-                width: 26px;
-                height: 26px;
-                margin-bottom: 0;
-                font-size: 10px;
-                flex-shrink: 0;
-            }
-
-            .step-human-label { max-width: none; text-align: left; font-size: 11px; }
-            .step.active::after { display: none !important; }
-
-            .field-label { min-width: 100px; font-size: 12px; }
-            .field-value { font-size: 13px; }
-
-            .step-tooltip {
-                left: 0;
-                width: 200px;
-                font-size: 11px;
-                transform: translateX(0) translateY(4px);
-            }
-
-            .step-tooltip::after { left: 20px; transform: translateX(0); }
-            .step:hover .step-tooltip, .step:focus-visible .step-tooltip { transform: translateX(0) translateY(0); }
-        }
-
-        @media (max-width: 480px) {
-            .result-field { flex-direction: column; gap: 2px; }
-            .field-label { min-width: auto; font-size: 11px; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.001ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.001ms !important;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="page">
-        <div class="container">
-            <!-- Шапка теперь внутри контейнера -->
-            <header class="site-header">
-                <a class="site-logo" href="https://grandmedtech.ru/" target="_blank" rel="noopener">
-                    <img src="data:image/png;base64,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
-                transform: translateX(0) translateY(4px);
-            }
-
-            .step-tooltip::after { left: 20px; transform: translateX(0); }
-            .step:hover .step-tooltip, .step:focus-visible .step-tooltip { transform: translateX(0) translateY(0); }
-        }
-
-        @media (max-width: 480px) {
-            .result-field { flex-direction: column; gap: 2px; }
-            .field-label { min-width: auto; font-size: 11px; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.001ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.001ms !important;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="page">
-        <div class="container">
-            <!-- Шапка теперь внутри контейнера -->
-            <header class="site-header">
-                <a class="site-logo" href="https://grandmedtech.ru/" target="_blank" rel="noopener">
-                    <img src="data:image/png;base64,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
